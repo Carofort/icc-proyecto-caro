@@ -20,7 +20,7 @@ public class App {
                     break;
                 case 2:
                 if(ordenador.getArreglo() == null){
-                    System.out.println("Debe ingresar primeramente un arreglo");
+                    System.out.println("Primero debe ingresar un arreglo");
                 } else{
                     ordenador.ordenarArreglo(); 
                 }    

@@ -45,7 +45,7 @@ public class MetodosOrdenamiento{
             System.out.println("3. Método Inserción");
             System.out.println("4. Método Burbuja Mejorado");
             System.out.println("0. Regresar al menu principal");
-            int metodo = leerEnteroValido(leer, "Solo las opciones: 0, 1, 2, 3 y 4", false, 0, 4);
+            int metodo = leerEnteroValido2(leer, "Solo las opciones: 0, 1, 2, 3 y 4", false, 0, 4);
 
             if(metodo == 0){
                 salir = true;
@@ -55,12 +55,12 @@ public class MetodosOrdenamiento{
             System.out.println("- ¿En qué orden?");
             System.out.println("1. Ascendente");
             System.out.println("2. Descendente");
-            boolean ascendente = leerEnteroValido(leer, "Solo las opciones: 1 y 2", false, 1, 2) == 1;
+            boolean ascendente = leerEnteroValido2(leer, "Solo las opciones: 1 y 2", false, 1, 2) == 1;
 
             System.out.println("- ¿Desea ver los pasos?");
             System.out.println("1. Si");
             System.out.println("2. No");
-            boolean logs = leerEnteroValido(leer, "Solo las opciones: 1 y 2", false, 1, 2) == 1;
+            boolean logs = leerEnteroValido2(leer, "Solo las opciones: 1 y 2", false, 1, 2) == 1;
 
             int[] arregloCopia = Arrays.copyOf(arreglo, arreglo.length);
 
@@ -84,7 +84,7 @@ public class MetodosOrdenamiento{
         } 
       
     }
-    public static int leerEnteroValido(Scanner leer, String mensaje, boolean numerosNegativos,
+    public static int leerEnteroValido2(Scanner leer, String mensaje, boolean numerosNegativos,
                                        int min, int max){
         int numero;
         do{
@@ -105,51 +105,82 @@ public class MetodosOrdenamiento{
         return numero;
     }    
 
-    //BURBUJA
     public void burbujaTradicional(int[] arregloCopia, boolean ascendente, boolean logs) {
+        System.out.println("Arreglo sin ordenar: " + Arrays.toString(arreglo));
         int tamanio = arregloCopia.length;
-        for (int i = 0; i < tamanio - 1; i++) {
-            for (int j = 0; j < tamanio - 1; j++) {
-                if (ascendente? arregloCopia[j] > arregloCopia[j + 1] : arregloCopia[j] < arregloCopia[j + 1]){  
-                    int aux = arregloCopia[j];
-                    arregloCopia[j] = arregloCopia[j + 1];
-                    arregloCopia[j + 1] = aux;
+        if(logs){
+            for (int i = 0; i < tamanio - 1; i++) {
+                System.out.println("Iteracion número " + (i + 1));
+                for (int j = 0; j < tamanio - 1; j++) {
+                    System.out.println("Comparamos: " + arregloCopia[j] + " con " + arregloCopia[j + 1]);
+                    if (ascendente? arregloCopia[j] > arregloCopia[j + 1] : arregloCopia[j] < arregloCopia[j + 1]){  
+                        int aux = arregloCopia[j];
+                        arregloCopia[j] = arregloCopia[j + 1];
+                        arregloCopia[j + 1] = aux;
+                        System.out.println("Se intercambia " + arregloCopia[j] + " con " + arregloCopia[j + 1]);
+                    }
                 }
-            }
-            if(logs){
-                System.out.println("Estado del arreglo: " + Arrays.toString(arregloCopia));
-            }
+                System.out.println(Arrays.toString(arregloCopia));
+            } 
+        } else {
+            for (int i = 0; i < tamanio - 1; i++) {
+                for (int j = 0; j < tamanio - 1; j++) {
+                    if (ascendente? arregloCopia[j] > arregloCopia[j + 1] : arregloCopia[j] < arregloCopia[j + 1]){  
+                        int aux = arregloCopia[j];
+                        arregloCopia[j] = arregloCopia[j + 1];
+                        arregloCopia[j + 1] = aux;
+                    }
+                }
+            } 
         }
     }
 
-    //SELECCIÓN
     public void sortBySeleccion(int[] arregloCopia, boolean ascendente, boolean logs) { 
+        System.out.println("Arreglo sin ordenar: " + Arrays.toString(arreglo));
         int tamanio = arregloCopia.length;
-        for(int i = 0; i < tamanio; i++){
-            System.out.println("Iteracion número " + (i + 1));
-            int indice = i;
-            for(int j = i + 1; j < tamanio; j++){
-                if (ascendente? arregloCopia[j] < arregloCopia[indice] : arregloCopia[j] > arregloCopia[indice]){
-                    indice = j;   
+        if(logs) {
+            for(int i = 0; i < tamanio; i++){
+                System.out.println("Iteracion número " + (i + 1));
+                int indice = i;
+                for(int j = i + 1; j < tamanio; j++){
+                    System.out.println("Comparamos: " + arregloCopia[j] + " con " + arregloCopia[indice]);
+                    if (ascendente? arregloCopia[j] < arregloCopia[indice] : arregloCopia[j] > arregloCopia[indice]){
+                        indice = j;   
+                        System.out.println("Nuevo índice: " + arregloCopia[indice]);
                     
-                }     
+                    }     
+                }
+                if(indice != i){
+                    int aux = arregloCopia[indice];
+                    arregloCopia[indice] = arregloCopia[i];
+                    arregloCopia[i] = aux;      
+                    System.out.println("Se intercambia " + arregloCopia[indice] + " con " + arregloCopia[i]);
+                }
+                System.out.println(Arrays.toString(arregloCopia));
             }
-            int aux = arregloCopia[indice];
-            arregloCopia[indice] = arregloCopia[i];
-            arregloCopia[i] = aux;      
-            
-            if(logs){
-                System.out.println("Estado del arreglo" + Arrays.toString(arregloCopia));
-            }
+        } else {
+            for(int i = 0; i < tamanio; i++){
+                int indice = i;
+                for(int j = i + 1; j < tamanio; j++){
+                    if (ascendente? arregloCopia[j] < arregloCopia[indice] : arregloCopia[j] > arregloCopia[indice]){
+                        indice = j;   
+                    }     
+                }
+                if(indice != i){
+                    int aux = arregloCopia[indice];
+                    arregloCopia[indice] = arregloCopia[i];
+                    arregloCopia[i] = aux;  
+                }
+            }    
         }
     }
     
-    //INSERCIÓN
     public void sortInsercion(int[] arregloCopia, boolean ascendente, boolean logs) {
+        System.out.println("Arreglo sin ordenar: " + Arrays.toString(arreglo));
         int tamanio = arregloCopia.length;
         if(logs){
             for(int i = 1; i < tamanio; i++){
-                System.out.println("Iteracion número " + i);
+                System.out.println("Iteracion número " + (i + 1));
                 int aux = arregloCopia[i];
                 int j = i - 1;
                 System.out.println("i=" + i + " j=" + j + " [i]=" + arregloCopia[i] + " [j]=" + arregloCopia[j]);
@@ -159,7 +190,7 @@ public class MetodosOrdenamiento{
                     j--;
                     System.out.println( Arrays.toString(arregloCopia));
                 }
-                arregloCopia[j+1] = aux;
+                arregloCopia[j + 1] = aux;
                 System.out.println(Arrays.toString(arregloCopia));
                 }
         } else {
@@ -175,16 +206,16 @@ public class MetodosOrdenamiento{
         }
     }
 
-    //BURBUJA AVANZADO
     public void sortBubbleAvanzado(int[] arregloCopia, boolean ascendente, boolean logs) {
+        System.out.println("Arreglo sin ordenar: " + Arrays.toString(arreglo));
         int tamanio = arregloCopia.length;
         if(logs){
             for(int i = 0; i < tamanio; i++){
                 boolean intercambio = false;
-                System.out.println("Iteración: " + (i+1));
+                System.out.println("Iteración: " + (i + 1));
                 for(int j = 0; j < tamanio - 1 - i; j++){
                     System.out.println("j= " + j +" [j]=" + arregloCopia[j] + 
-                    " j+1= " + j+1 +" [j+1]=" + arregloCopia[j+1]);
+                    " j+1= " + j+1 +" [j+1]=" + arregloCopia[j + 1]);
                     if(ascendente? arregloCopia[j] > arregloCopia[j + 1] : arregloCopia[j] < arregloCopia[j + 1]){
                         System.out.println("Si hay cambio");
                         int aux = arregloCopia[j];
@@ -193,10 +224,10 @@ public class MetodosOrdenamiento{
                         intercambio = true;
                     } 
                     System.out.println( Arrays.toString(arregloCopia));
+                }
                 if(!intercambio){
                     System.out.println("No hubo cambio");
                     break;
-                }
                 }          
             }
         } else {
