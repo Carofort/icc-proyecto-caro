@@ -16,10 +16,10 @@ public class App {
 
             switch(opcion){
                 case 1:
-                    ordenador.arregloPrincipal();
+                    ordenador.anadirArreglo();
                     break;
                 case 2:
-                if(ordenador.getArreglo() == null){
+                if(ordenador.arregloPrincipal() == null){
                     System.out.println("Primero debe ingresar un arreglo");
                 } else{
                     ordenador.ordenarArreglo(); 

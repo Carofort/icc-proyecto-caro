@@ -2,7 +2,7 @@ import java.util.Scanner;
 import java.util.Arrays;
 public class MetodosOrdenamiento{
     private int[] arreglo;
-    public void arregloPrincipal(){
+    public void anadirArreglo(){
         Scanner leer = new Scanner(System.in);
         int tamanio = leerEnteroValido(leer, "Ingrese el tamaño del arreglo: ", false);
         arreglo = new int[tamanio];
@@ -13,7 +13,7 @@ public class MetodosOrdenamiento{
         System.out.println("Arreglo ingresado: " + Arrays.toString(arreglo));
     }
 
-    public int[] getArreglo() {
+    public int[] arregloPrincipal() {
         return arreglo;
     }
   
@@ -66,7 +66,7 @@ public class MetodosOrdenamiento{
 
             switch(metodo){
                 case 1:
-                    burbujaTradicional(arregloCopia, ascendente, logs);
+                    sortBubbleTradicional(arregloCopia, ascendente, logs);
                     break;
                 case 2:
                     sortBySeleccion(arregloCopia, ascendente, logs);
@@ -105,7 +105,7 @@ public class MetodosOrdenamiento{
         return numero;
     }    
 
-    public void burbujaTradicional(int[] arregloCopia, boolean ascendente, boolean logs) {
+    public void sortBubbleTradicional(int[] arregloCopia, boolean ascendente, boolean logs) {
         System.out.println("Arreglo sin ordenar: " + Arrays.toString(arreglo));
         int tamanio = arregloCopia.length;
         if(logs){
